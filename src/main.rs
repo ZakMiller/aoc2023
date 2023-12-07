@@ -3,6 +3,8 @@ mod p2;
 mod p3;
 mod p4;
 mod p5;
+mod p6;
+mod p7;
 fn main() {
-   p5::advent();
+   p7::advent();
 }
