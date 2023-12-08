@@ -12,10 +12,7 @@ fn common(mut lines: Vec<Line>, jokers: bool) -> u32 {
         }
 
         let lookup = HashMap::from([('A', 14), ('K', 13), ('Q', 12), ('J', j_val), ('T', 10)]);
-        for i in 0..5 {
-            let a_char = a.hand.chars().nth(i).unwrap();
-            let b_char = b.hand.chars().nth(i).unwrap();
-
+        for (a_char, b_char) in a.hand.chars().zip(b.hand.chars()) {
             // second unwrap_or is because Rust is greedy and will evaluate
             // either way
             let a_val: u32 = lookup
@@ -75,7 +72,7 @@ fn get_hand_type_jokers(hand: &str) -> u32 {
         "2,2,1" => 3,
         "2,1,1,1" => 2,
         "1,1,1,1,1" => 1,
-        _ => panic!("unexpected result {}", lookup_key),
+        v => panic!("unexpected result {}", v),
     }
 }
 fn get_hand_type(hand: &str) -> u32 {
@@ -107,9 +104,7 @@ fn get_hand_type(hand: &str) -> u32 {
 
 fn one(content: &str) -> u32 {
     let lines: Vec<Line> = content
-        .split("\n")
-        .collect::<Vec<_>>()
-        .iter()
+        .lines()
         .map(|l| {
             let pieces = l.split(" ").collect::<Vec<_>>();
             return Line {
@@ -123,9 +118,7 @@ fn one(content: &str) -> u32 {
 }
 fn two(content: &str) -> u32 {
     let lines: Vec<Line> = content
-        .split("\n")
-        .collect::<Vec<_>>()
-        .iter()
+        .lines()
         .map(|l| {
             let pieces = l.split(" ").collect::<Vec<_>>();
             return Line {
