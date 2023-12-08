@@ -29,22 +29,21 @@ fn get_digit(str: &str, i: usize) -> Option<u32> {
 
 pub fn advent() {
     let contents = fs::read_to_string("input/p1.txt").unwrap();
-    let lines = contents.split("\n");
-    let result: i32 = lines.map(|l| {
-        let mut first: i32 = -1;
-        let mut last: i32 = -1;
+    let result: u32 = contents.lines().map(|l| {
+        let mut first: Option<u32> = None;
+        let mut last: Option<u32> = None;
         for (i, _) in l.chars().enumerate() {
             match get_digit(l, i) {
                 None => continue,
                 Some(d) => {
-                    if first == -1 {
-                        first = d as i32;
+                    if first == None {
+                        first = Some(d);
                     }
-                    last = d as i32;
+                    last = Some(d);
                 }
         }
     }
-        format!("{}{}", first, last).parse::<i32>().unwrap()
+        format!("{}{}", first.unwrap(), last.unwrap()).parse::<u32>().unwrap()
     }).sum();
     println!("{}", result);
 }

@@ -19,14 +19,12 @@ fn common(pairs: Vec<(u128, u128)>) -> u128 {
                     && smallest_losing_charging_time_after_winning == -1
                 {
                     smallest_losing_charging_time_after_winning = charging_time as i128;
-                    break;
+                    return (smallest_losing_charging_time_after_winning
+                        - smallest_winning_charging_time) as u128;
                 }
             }
 
-            let result = (smallest_losing_charging_time_after_winning
-                - smallest_winning_charging_time) as u128;
-            println!("time: {}, distance: {}, result: {}", time, distance, result);
-            return result;
+            panic!("no solution found");
         })
         .product();
     return result;
